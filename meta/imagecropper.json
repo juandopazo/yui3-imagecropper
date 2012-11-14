@@ -1,0 +1,13 @@
+{
+    "imagecropper": {
+        "requires": [
+            "widget",
+            "dd-drag",
+            "dd-constrain",
+            "resize-base",
+            "resize-constrain"
+        ],
+
+        "skinnable": true
+    }
+}
