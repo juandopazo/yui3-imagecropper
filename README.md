@@ -1,0 +1,2 @@
+ImageCropper YUI widget
+=======================

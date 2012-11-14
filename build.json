@@ -1,0 +1,10 @@
+{
+    "name": "gallery-imagecropper",
+    "builds": {
+        "gallery-imagecropper": {
+            "jsfiles": [
+                "js/imagecropper.js"
+            ]
+        }
+    }
+}

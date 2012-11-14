@@ -1,0 +1,10 @@
+{
+    "name"       : "gallery-imagecropper",
+    "displayName": "Gallery: imagecropper",
+    "description": "Unofficial port of the YUI2 ImageCropper",
+    "author"     : [ "jdopazo" ],
+
+    "tags": [ "gallery" ],
+
+    "examples": []
+}

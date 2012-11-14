@@ -1,0 +1,43 @@
+<div class="intro">
+    <p>
+    Unofficial port of the YUI2 ImageCropper
+    </p>
+</div>
+
+<h2>Description</h2>
+
+<p>This is an unofficial port of the ImageCropper from YUI2.x.<br>
+<br>
+Main differences are:<br>
+<ul>
+<li>Keys only work when the resize element is focused</li>
+<li>'ratio' attribute is now 'preserveRatio'</li>
+</ul>
+<br>
+<br>
+Check the documentation for other method/attribute changes<br>
+</p>
+
+```
+YUI().use('yql', 'gallery-imagecropper', function(Y) {
+
+    Y.random = function (n) {
+        return Math.floor(Math.random() * n);
+    };
+    
+    Y.YQL('select width,height,source from flickr.photos.sizes where photo_id in (select id from flickr.photos.interestingness limit 10) and label = "Medium"', function (response) {
+        
+        var photo = response.query.results.size[Y.random(10)];
+            
+        var imagecropper = new Y.ImageCropper({
+            source: photo.source,
+            width: photo.width,
+            height: photo.height
+        });
+        imagecropper.render();
+        
+    });
+
+});
+```
+
