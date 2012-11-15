@@ -1,10 +1,12 @@
 {
     "gallery-imagecropper": {
-    	"requires": [
-    		"resize",
-    		"widget",
-    		"gallery-event-arrow",
-    		"dd-constrain"
-    	]
+        "requires": [
+        	"widget",
+        	"dd-drag",
+        	"dd-constrain",
+        	"resize-base",
+        	"resize-constrain",
+            "gallery-event-arrow"
+        ]
     }
 }

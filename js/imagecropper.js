@@ -1,6 +1,7 @@
 /**
-@description <p>Creates an Image Cropper control.</p>
-@requires widget,dd-drag,dd-constrain,resize-base,resize-constrain
+Creates an Image Cropper control
+
+@requires widget,dd-drag,dd-constrain,resize-base,resize-constrain,gallery-event-arrow
 @module imagecropper
 */
 
@@ -32,7 +33,7 @@ Y.extend(ImageCropper, Y.Widget, {
     /**
     Template that will contain the ImageCropper's mask.
     
-    @property ImageCropper.CROP_MASK_TEMPLATE
+    @property CROP_MASK_TEMPLATE
     @type {HTML}
     @default &lt;div class="[...-mask]">&lt;/div>
     */
@@ -40,7 +41,7 @@ Y.extend(ImageCropper, Y.Widget, {
     /**
     Template that will contain the ImageCropper's resize node.
     
-    @property ImageCropper.RESIZE_KNOB_TEMPLATE
+    @property RESIZE_KNOB_TEMPLATE
     @type {HTML}
     @default &lt;div class="[...-resize-knob]" tabindex="0">&lt;/div>
     */
@@ -48,7 +49,7 @@ Y.extend(ImageCropper, Y.Widget, {
     /**
     Template that will contain the ImageCropper's resize mask.
     
-    @property ImageCropper.RESIZE_MASK_TEMPLATE
+    @property RESIZE_MASK_TEMPLATE
     @type {HTML}
     @default &lt;div class="[...-resize-mask]">&lt;/div>
     */
@@ -190,7 +191,7 @@ Y.extend(ImageCropper, Y.Widget, {
     _syncResizeMask: function () {
         var resizeKnob = this.get('resizeKnob');
         resizeKnob.setStyle('backgroundPosition',
-            (-resizeKnob.get('offsetLeft')) + 'px ' + 
+            (-resizeKnob.get('offsetLeft')) + 'px ' +
             (-resizeKnob.get('offsetTop')) + 'px'
         );
     },
@@ -221,100 +222,82 @@ Y.extend(ImageCropper, Y.Widget, {
             o[ns + 'Event'] = e;
             
             /**
-           @event resize:start
-           @description Relay of the Resize utility event.
-           @param {EventFacade} event An Event Facade object with the following specific property added:
-           <dl>
-           <dt>resizeEvent</dt><dd>The Event Facade object provided by the Resize utility.</dd>
-           </dl>
-           @type {CustomEvent}
-           */
+            Relay of the Resize utility event.
+
+            @event resize:start
+            @param {EventFacade} event An Event Facade object with the following specific property added:
+            @param {EventFacade} event.resizeEvent The Event Facade object provided by the Resize utility.
+            **/
             /**
-           @event resize:resize
-           @description Relay of the Resize utility event.
-           @param {EventFacade} event An Event Facade object with the following specific property added:
-           <dl>
-           <dt>resizeEvent</dt><dd>The Event Facade object provided by the Resize utility.</dd>
-           </dl>
-           @type {CustomEvent}
-           */
+            Relay of the Resize utility event.
+
+            @event resize:resize
+            @param {EventFacade} event An Event Facade object with the following specific property added:
+            @param {EventFacade} event.resizeEvent The Event Facade object provided by the Resize utility
+            **/
             /**
-           @event resize:end
-           @description Relay of the Resize utility event.
-           @param {EventFacade} event An Event Facade object with the following specific property added:
-           <dl>
-           <dt>resizeEvent</dt><dd>The Event Facade object provided by the Resize utility.</dd>
-           </dl>
-           @type {CustomEvent}
-           */
+            Relay of the Resize utility event.
+
+            @event resize:end
+            @param {EventFacade} event An Event Facade object with the following specific property added:
+            @param {EventFacade} event.resizeEvent The Event Facade object provided by the Resize utility
+            **/
             /**
-           @event drag:start
-           @description Relay of the Drag utility event.
-           @param {EventFacade} event An Event Facade object with the following specific property added:
-           <dl>
-           <dt>drag</dt><dd>The Event Facade object provided by the Drag utility.</dd>
-           </dl>
-           @type {CustomEvent}
-           */
+            Relay of the Drag utility event.
+
+            @event drag:start
+            @param {EventFacade} event An Event Facade object with the following specific property added:
+            @param {EventFacade} event.dragEvent The Event Facade object provided by the Drag utility.
+            **/
             /**
-           @event drag:resize
-           @description Relay of the Drag utility event.
-           @param {EventFacade} event An Event Facade object with the following specific property added:
-           <dl>
-           <dt>drag</dt><dd>The Event Facade object provided by the Drag utility.</dd>
-           </dl>
-           @type {CustomEvent}
-           */
+            Relay of the Drag utility event.
+
+            @event drag:resize
+            @param {EventFacade} event An Event Facade object with the following specific property added:
+            @param {EventFacade} event.dragEvent The Event Facade object provided by the Drag utility.
+            **/
             /**
-           @event drag:end
-           @description Relay of the Drag utility event.
-           @param {EventFacade} event An Event Facade object with the following specific property added:
-           <dl>
-           <dt>drag</dt><dd>The Event Facade object provided by the Drag utility.</dd>
-           </dl>
-           @type {CustomEvent}
-           */
+            Relay of the Drag utility event.
+
+            @event drag:end
+            @param {EventFacade} event An Event Facade object with the following specific property added:
+            @param {EventFacade} event.dragEvent The Event Facade object provided by the Drag utility.
+            **/
             this.fire(sourceEvent, o);
             
             o.sourceEvent = sourceEvent;
             
             /**
-           @event crop:start
-           @description Fires at the start of a crop operation. Unifies drag:start and and resize:start.
-           @param {EventFacade} event An Event Facade object with the following specific property added:
-           <dl>
-           <dt>left</dt><dd>The current X position of the crop area relative to the base image.</dd>
-           <dt>top</dt><dd>The current Y position of the crop area relative to the base image.</dd>
-           <dt>width</dt><dd>The new width of the crop area.</dd>
-           <dt>height</dt><dd>The new height of the crop area.</dd>
-           </dl>
-           @type {CustomEvent}
-           */
+            Fires at the start of a crop operation. Unifies drag:start and and resize:start.
+
+            @event crop:start
+            @param {EventFacade} event An Event Facade object with the following specific property added:
+            @param {Number} event.left The current X position of the crop area relative to the base image.
+            @param {Number} event.top The current Y position of the crop area relative to the base image.
+            @param {Number} event.width The new width of the crop area.
+            @param {Number} event.height The new height of the crop area.
+            **/
             /**
-           @event crop:crop
-           @description Fires every time the crop area changes. Unifies drag:drag and resize:resize.
-           @param {EventFacade} event An Event Facade object with the following specific property added:
-           <dl>
-           <dt>left</dt><dd>The current X position of the crop area relative to the base image.</dd>
-           <dt>top</dt><dd>The current Y position of the crop area relative to the base image.</dd>
-           <dt>width</dt><dd>The new width of the crop area.</dd>
-           <dt>height</dt><dd>The new height of the crop area.</dd>
-           </dl>
-           @type {CustomEvent}
-           */
+            Fires every time the crop area changes. Unifies drag:drag and resize:resize.
+
+            @event crop:crop
+            @param {EventFacade} event An Event Facade object with the following specific property added:
+            @param {Number} event.left The current X position of the crop area relative to the base image.
+            @param {Number} event.top The current Y position of the crop area relative to the base image.
+            @param {Number} event.width The new width of the crop area.
+            @param {Number} event.height The new height of the crop area.
+            **/
             /**
-           @event crop:end
-           @description Fires at the end of a crop operation. Unifies drag:end and resize:end.
-           @param {EventFacade} event An Event Facade object with the following specific property added:
-           <dl>
-           <dt>left</dt><dd>The current X position of the crop area relative to the base image.</dd>
-           <dt>top</dt><dd>The current Y position of the crop area relative to the base image.</dd>
-           <dt>width</dt><dd>The new width of the crop area.</dd>
-           <dt>height</dt><dd>The new height of the crop area.</dd>
-           </dl>
-           @type {CustomEvent}
-           */
-            this.fire('crop:' + (eventType == ns ? 'crop' : eventType), o);
+            Fires at the end of a crop operation. Unifies drag:end and resize:end.
+            
+            @event crop:end
+            @param {EventFacade} event An Event Facade object with the following specific property added:
+            @param {Number} event.left The current X position of the crop area relative to the base image.
+            @param {Number} event.top The current Y position of the crop area relative to the base image.
+            @param {Number} event.width The new width of the crop area.
+            @param {Number} event.height The new height of the crop area.
+            **/
+            this.fire('crop:' + (eventType === ns ? 'crop' : eventType), o);
             
         }, this);
     },
@@ -436,9 +419,15 @@ Y.extend(ImageCropper, Y.Widget, {
         if (this.drag) {
             this.drag.destroy();
         }
+
+        Y.Object.each(
+            this.getAttrs(['resizeKnob', 'resizeMask', 'cropMask']),
+            function (node) {
+                node.destroy();
+            }
+        );
         
-        this.drag = null;
-        this.resize = null;
+        this.drag = this.resize = null;
     }
     
 }, {
@@ -446,7 +435,7 @@ Y.extend(ImageCropper, Y.Widget, {
     /**
     The identity of the widget.
 
-    @property ImageCropper.NAME
+    @property NAME
     @type String
     @default 'imagecropper'
     @readOnly
@@ -456,27 +445,27 @@ Y.extend(ImageCropper, Y.Widget, {
     NAME: IMAGE_CROPPER,
     
     /**
-    Array of events to relay from the Resize utility to the ImageCropper 
+    Array of events to relay from the Resize utility to the ImageCropper
     
-    @property ImageCropper.RESIZE_EVENTS
+    @property RESIZE_EVENTS
     @type {Array}
     @private
     @static
     */
     RESIZE_EVENTS: ['start', 'resize', 'end'],
     /**
-    Array of attributes to relay from the ImageCropper to the Resize utility 
+    Array of attributes to relay from the ImageCropper to the Resize utility
 
-    @property ImageCropper.RESIZE_ATTRS
+    @property RESIZE_ATTRS
     @type {Array}
     @private
     @static
     */
     RESIZE_ATTRS: ['minWidth', 'minHeight', 'preserveRatio'],
     /**
-    Array of events to relay from the Drag utility to the ImageCropper 
+    Array of events to relay from the Drag utility to the ImageCropper
 
-    @property ImageCropper.DRAG_EVENTS
+    @property DRAG_EVENTS
     @type {Array}
     @private
     @static
@@ -499,7 +488,7 @@ Y.extend(ImageCropper, Y.Widget, {
     Static property used to define the default attribute configuration of
     the Widget.
 
-    @property ImageCropper.ATTRS
+    @property ATTRS
     @type {Object}
     @protected
     @static
