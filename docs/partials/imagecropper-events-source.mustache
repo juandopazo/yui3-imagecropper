@@ -8,14 +8,8 @@
 
 <script type="text/javascript">
 YUI({
-  filter: 'raw',
-  modules: {
-    imagecropper: {
-      fullpath: 'http://localhost/yui3/src/imagecropper/build_tmp/imagecropper.js',
-      requires: ['base-build', 'widget', 'dd-drag', 'dd-constrain', 'resize-base', 'resize-constrain', 'gallery-event-arrow']
-    }
-  }
-}).use('imagecropper', function(Y) {
+  gallery: '{{galleryVersion}}'
+}).use('gallery-imagecropper', function(Y) {
     
   Y.Node.addMethod('setBackgroundXY', function (node, xy) {
     xy = xy || [0, 0];
@@ -24,11 +18,7 @@ YUI({
         xy[i] += 'px';
       }
     });
-    this.setStyles({
-      backgroundPosition: xy.join(' '),
-      backgroundPositionX: xy[0],
-      backgroundPositionY: xy[1]
-    });
+    this.setStyle('backgroundPosition', xy.join(' '));
   });
   
   var coordview = Y.one('#coords'),
@@ -44,15 +34,14 @@ YUI({
   }
     
   var imagecropper = new Y.ImageCropper({
-    src: 'http://farm8.staticflickr.com/7016/6748720265_e2f3e82fee.jpg',
+    source: 'http://farm8.staticflickr.com/7016/6748720265_e2f3e82fee.jpg',
     width: 333,
     height: 500
   });  
   imagecropper.render('#imagecropper');
+  result.setStyle('backgroundImage', 'url(' + imagecropper.get('source') + ')');
 
-  imagecropper.on('crop:crop', function (e) {
-    updatePreview(e);
-  });
+  imagecropper.on('crop:crop', updatePreview);
 
   updatePreview(imagecropper.getCropCoords());
 });

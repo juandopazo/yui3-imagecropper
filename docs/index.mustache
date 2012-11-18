@@ -1,10 +1,10 @@
 <div class="intro yui3-g">
   <div class="yui3-u-2-3">
   <p>The ImageCropper widget gives you an interactive interface for getting the dimensions to crop an image. While it doesn't provide a utility for creating a new resize image on the client out of the box, its API returns enough data for you to implement your own client or server resizing solution.</p>
-  <p>Optional keyboard support for accesibility is included as a Plugin.</p>
+  <p>Optional keyboard support for accesibility is included as a plugin.</p>
   </div>
   <div class="yui3-u-1-3" style="text-align: right">
-  <img src="{{componentAssets}}/img/imagecropper.jpg" alt="Screenshot of the ImageCropper widget" style="border: 1px solid #bfbfbf; margin: 8px 0;">
+  <img src="{{componentAssets}}/img/imagecropper.jpg" alt="ImageCropper widget screenshot" style="border: 1px solid #bfbfbf; margin: 8px 0;">
   </div>
 </div>
 
@@ -18,7 +18,9 @@ If you're in a hurry, here's how to create an ImageCropper widget in a few lines
 </p>
 
 ```
-YUI().use('imagecropper', function (Y) {
+YUI({
+  gallery: '{{galleryVersion}}'
+}).use('{{name}}', function (Y) {
 
   // Create a new instance of ImageCropper, setting its width 
   // and height, and the URL for the image you want to crop.
@@ -122,10 +124,15 @@ The following attributes are provided to fine tune the behavior of each ImageCro
 <h3>Adding keyboard support</h3>
 
 <p>
-The Keys plugin adds keyboard support to any Drag instance. Plugging it into the Drag instance used by the ImageCropper will allow the user the move the crop area with the keyboard arrows. Holding down the shift key will move the crop rectangle more rapidly. You can configure how much the rectangle is moved by setting the `keyTick` and `shiftKeyTick` configuration options on the Plugin. By default, the crop area is moved 1px and 10px while holding down the shift key.
+ImageCropper is build using Y.Drag and Y.Resize. Conviniently, an instance of each is available in the `imagecropper.drag` and `imagecropper.resize` properties. You can use this for customizing how the ImageCropper reacts to user interaction.
+</p>
+<p>
+The DDKeys plugin adds keyboard support to any Drag instance. Plugging it into the Drag instance used by the ImageCropper will allow the user the move the crop area with the keyboard arrows. Holding down the shift key will move the crop rectangle more rapidly. You can configure how much the rectangle is moved by setting the `keyTick` and `shiftKeyTick` configuration options on the Plugin. By default, the crop area is moved 1px and 10px while holding down the shift key.
 </p>
 ```
-YUI({...}).use('imagecropper', 'dd-keys', function (Y) {
+YUI({
+  gallery: '{{galleryVersion}}'
+}).use('{{name}}', 'dd-keys', function (Y) {
   
   var imagecropper = new Y.ImageCropper({
     srcNode: '#my-image',

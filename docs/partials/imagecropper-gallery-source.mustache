@@ -10,13 +10,7 @@
 
 <script type="text/javascript">
 YUI({
-  filter: 'raw',
-  modules: {
-    imagecropper: {
-      fullpath: 'http://localhost/yui3/src/imagecropper/build_tmp/imagecropper.js',
-      requires: ['base-build', 'widget', 'dd-drag', 'dd-constrain', 'resize-base', 'resize-constrain', 'gallery-event-arrow']
-    }
-  }
+  gallery: '{{galleryVersion}}'
 }).use('imagecropper', function(Y) {
     
   var defInitWidth = 50,

@@ -5,21 +5,16 @@
 
 <script type="text/javascript">
 YUI({
-  filter: 'raw',
-  modules: {
-    imagecropper: {
-      fullpath: 'http://localhost/yui3/src/imagecropper/build_tmp/imagecropper.js',
-      requires: ['base-build', 'widget', 'dd-drag', 'dd-constrain', 'resize-base', 'resize-constrain', 'gallery-event-arrow']
-    }
-  }
-}).use('imagecropper', function(Y) {
+  gallery: '{{galleryVersion}}'
+}).use('gallery-imagecropper', function(Y) {
     
     // Create a new instance of ImageCropper from markup          
     var imagecropper = new Y.ImageCropper({
       srcNode: "#crop",
       width: 335,
       height: 500
-    }).render();
+    });
+    imagecropper.render();
 
     Y.one('#save').on('click', function () {
       var coords = imagecropper.getCropCoords()

@@ -368,7 +368,7 @@ Y.extend(ImageCropper, Y.Widget, {
     
     @method getCropCoords
     @return {Object} The top, left, height, width and image url of the image being cropped
-    */
+    **/
     getCropCoords: function () {
         var resizeKnob = this.get('resizeKnob'),
             result, xy;
@@ -397,10 +397,10 @@ Y.extend(ImageCropper, Y.Widget, {
     /**
     Resets the crop element back to it's original position
     
-    @method reset
+    @method restart
     @chainable
-    */
-    reset: function () {
+    **/
+    restart: function () {
         var initialXY = this.get('initialXY');
         this.get('resizeKnob').setStyles({
             left: initialXY[0],

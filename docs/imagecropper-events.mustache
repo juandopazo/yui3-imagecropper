@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="http://localhost/yui3-gallery/src/gallery-imagecropper/build_tmp/assets/skins/sam/gallery-imagecropper.css">
 <style>
 .example {
   position: relative;
@@ -39,7 +38,9 @@ This example demonstrates how to use the `crop:crop` event from ImageCropper to 
 <p>The only module you need is the `imagecropper` module.</p>
 ```
 <script>
-YUI().use('imagecropper', function (Y) {
+YUI({
+  gallery: '{{galleryVersion}}'
+}).use('gallery-imagecropper', function (Y) {
     // We'll write example code here
 });
 </script>
@@ -52,22 +53,18 @@ YUI().use('imagecropper', function (Y) {
 Y.Node.addMethod('setBackgroundXY', function (node, xy) {
   xy = xy || [0, 0];
   // Default Number coordinates to pixels
-  Y.Array.each(xy, function (val, i) {
-    if (Y.Lang.isNumber(val)) {
-      xy[i] += 'px';
-    }
-  });
-  // Some browsers support the backgroundPosition shorthand
-  // others require you to set both X and Y separately
-  this.setStyles({
-    backgroundPosition: xy.join(' '),
-    backgroundPositionX: xy[0],
-    backgroundPositionY: xy[1]
-  });
+  if (typeof xy[0] === 'number') {
+    xy[0] += 'px';
+  }
+  if (typeof xy[1] === 'number') {
+    xy[1] += 'px';
+  }
+  
+  this.setStyle('backgroundPosition', xy.join(' '));
 });
 ```
 
-<h3>Settig up the photo</h3>
+<h3>Setting up the photo</h3>
 <p>You can fetch the photo's information using the `IO` module or using any other method you prefer.</p>
 ```
 var coordview = Y.one('#coords'),
