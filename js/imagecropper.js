@@ -1,5 +1,6 @@
 /**
-Creates an Image Cropper control
+The ImageCropper widget provides you with an interface to crop sections
+of an image to then generate a new image from a service in your server
 
 @requires widget,dd-drag,dd-constrain,resize-base,resize-constrain,gallery-event-arrow
 @module imagecropper
