@@ -3,7 +3,8 @@
     "builds": {
         "gallery-imagecropper": {
             "jsfiles": [
-                "js/imagecropper.js"
+                "js/imagecropper.js",
+                "js/dd-keys.js"
             ]
         }
     }
