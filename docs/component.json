@@ -35,15 +35,6 @@
     		"tags"			: ["imagecropper"],
 
     		"hideTableOfContents": true
-    	},
-        {
-            "name"          : "imagecropper-autosize",
-            "displayName"   : "Writing an ImageCropper AutoSize plugin",
-            "description"   : "This example shows how to develop a Plugin for ImageCropper that resizes the widget automatically based on the size of its image",
-            "modules"       : ["gallery-imagecropper"],
-            "tags"          : ["imagecropper", "plugin"],
-
-            "hideTableOfContents": true
-        }
+    	}
     ]
 }
